@@ -1,7 +1,7 @@
 services:
   lighttpd:
     build: {}
-    image: semhoun/lighttpd:${LIGHTTPD_VERSION}
+    image: semhoun/lighttpd
     volumes:
       - ./rootfs/www/:/www/
     ports:

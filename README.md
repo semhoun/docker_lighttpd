@@ -1,60 +1,99 @@
-# Semhoun's Webserver
+# Lighttpd Docker Image
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)  ![Docker Size](https://img.shields.io/docker/image-size/semhoun/lighttpd)  ![Docker Pull](https://img.shields.io/docker/pulls/semhoun/lighttpd)
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
+[![Docker Image Size](https://img.shields.io/docker/image-size/semhoun/lighttpd)](https://hub.docker.com/r/semhoun/lighttpd)
+[![Docker Pulls](https://img.shields.io/docker/pulls/semhoun/lighttpd)](https://hub.docker.com/r/semhoun/lighttpd)
 
-Lighttpd simple server
+A lightweight Docker image for [Lighttpd](https://www.lighttpd.net/), a secure, fast, and flexible web server optimized for high-performance environments.
 
-Used in E-Dune infra.
+## Features
 
-## Getting Started
+- Based on Debian slim for minimal footprint
+- Automatic detection of `public/` subdirectory as document root
+- Simple volume-based configuration
+- Ready for production use
 
-### Prerequisities
+## Prerequisites
 
-In order to run this container you'll need docker installed.
+- [Docker](https://docs.docker.com/get-docker/)
+- (Optional) [Docker Compose](https://docs.docker.com/compose/install/)
 
-* [Windows](https://docs.docker.com/windows/started)
-* [OS X](https://docs.docker.com/mac/started/)
-* [Linux](https://docs.docker.com/linux/started/)
+## Quick Start
 
-### Usage
+### Docker
 
-#### Docker
-
-```shell
-docker run -v ./www:/www semhoun/webserver
+```bash
+docker run -d \
+  -p 8080:80 \
+  -v $(pwd)/www:/www \
+  --name lighttpd \
+  semhoun/lighttpd
 ```
-#### Docker Compose
+
+### Docker Compose
+
 ```yaml
-version: "3.2"
+version: "3.8"
 
 services:
   lighttpd:
     image: semhoun/lighttpd
+    container_name: lighttpd
     volumes:
-      - ./www/:/www/
+      - ./www:/www
     ports:
-      - 8080:80
+      - "8080:80"
+    restart: unless-stopped
 ```
 
-#### Volumes
+Then run:
+```bash
+docker-compose up -d
+```
 
-* `/www` - Website location (www/public would be detected as root directory)
+## Configuration
 
+### Volumes
 
-## Built With
+| Path | Description |
+|------|-------------|
+| `/www` | Web root directory. If a `public/` subdirectory exists, it will be used as the document root automatically. |
 
-* Debian bullseye
-* Lighttpd
+### Ports
 
-## Find Us
+| Port | Description |
+|------|-------------|
+| `80` | HTTP port |
 
-* [GitLab](https://gitlab.com/semhoun/docker_lighttpd)
-* [DockerHub](https://hub.docker.com/repository/docker/semhoun/lighttpd)
+## Project Structure
 
-## Authors
+```
+./www/
+├── index.html          # Main entry point
+├── public/             # Auto-detected as root if present
+│   ├── index.html
+│   └── ...
+└── ...
+```
 
-* **Nathanaël Semhoun** -  [semhoun](https://gitlab.com/semhoun)
+## Building from Source
+
+```bash
+git clone https://github.com/nathanael-semhoun/docker_lighttpd.git
+cd docker_lighttpd
+docker build -t my-lighttpd .
+```
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
+## Author
+
+- **Nathanaël Semhoun** – [@semhoun](https://github.com/nathanael-semhoun)
+
+## Links
+
+- [Docker Hub](https://hub.docker.com/r/semhoun/lighttpd)
+- [GitHub Repository](https://github.com/nathanael-semhoun/docker_lighttpd)
+- [Lighttpd Documentation](https://redmine.lighttpd.net/projects/lighttpd/wiki)

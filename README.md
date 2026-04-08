@@ -70,9 +70,6 @@ docker-compose up -d
 ```
 ./www/
 ├── index.html          # Main entry point
-├── public/             # Auto-detected as root if present
-│   ├── index.html
-│   └── ...
 └── ...
 ```
 
@@ -90,10 +87,10 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE) for detai
 
 ## Author
 
-- **Nathanaël Semhoun** – [@semhoun](https://github.com/nathanael-semhoun)
+- **Nathanaël Semhoun** – [@semhoun](https://github.com/semhoun)
 
 ## Links
 
 - [Docker Hub](https://hub.docker.com/r/semhoun/lighttpd)
-- [GitHub Repository](https://github.com/nathanael-semhoun/docker_lighttpd)
+- [GitHub Repository](https://github.com/semhoun/docker_lighttpd)
 - [Lighttpd Documentation](https://redmine.lighttpd.net/projects/lighttpd/wiki)

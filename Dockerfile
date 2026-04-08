@@ -1,13 +1,13 @@
-FROM debian:bullseye-slim
+FROM debian:trixie-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TERM=linux
 
 RUN apt-get update -y \
   && apt-get install -y  \
-		curl ca-certificates vim bash dos2unix wget curl git unzip \
-		locales \
-		lighttpd \
+    curl ca-certificates vim bash dos2unix wget curl git unzip \
+    locales \
+    lighttpd \
   \
   \
 # Configure www user  
